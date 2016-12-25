@@ -37,17 +37,20 @@ def get_alphabet(batch_size):
 
     return images, one_hots
 
-def scipy_get(batch_size, num_chars):
+def scipy_get(batch_size, num_chars, validate=False):
     OFFSET = 65
-
+    
     inputs = np.ndarray(shape=(batch_size, 16384), dtype=int)
     labels = []
 
     for image in range(batch_size):
         char = random.randrange(num_chars)
-        image_tag = random.randrange(0, 300)
+        if validate:
+            image_tag = random.randrange(300, 350)
+        else:
+            image_tag = random.randrange(0, 300)
 
-        inputs[image] = scipy.misc.imread('characters/{:x}/hsf_0_{:0>5d}.png'.format(char + OFFSET, image_tag), flatten=True).flatten()
+        inputs[image] = image_to_vector('characters/{:x}/hsf_0_{:0>5d}.png'.format(char + OFFSET, image_tag))
         labels.append(char)
 
     inputs = inputs / inputs.max(axis=0)
@@ -55,3 +58,7 @@ def scipy_get(batch_size, num_chars):
     outputs = np.eye(num_chars)[labels] 
 
     return inputs, outputs
+
+def image_to_vector(location):
+    return scipy.misc.imread(location, flatten=True).flatten()
+
