@@ -1,0 +1,6 @@
+venv/
+dataset/
+models/
+*~
+*.swp
+*.swo
