@@ -1,2 +1,2 @@
-model_checkpoint_path: "4chars"
-all_model_checkpoint_paths: "4chars"
+model_checkpoint_path: "26chars"
+all_model_checkpoint_paths: "26chars"
