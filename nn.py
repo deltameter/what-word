@@ -17,8 +17,7 @@ HIDDEN_UNITS = 512
 NUM_LABELS = 26
 
 LEARNING_RATE = 3e-4
-LAMBDA = 1e-3
-BATCH_SIZE = 2000
+IMAGES_PER_CHAR = 2000
 NUM_ITERATIONS = 1000
 STOP_ACCURACY = 0.97
 
@@ -32,22 +31,12 @@ b_layer1 = bias_variable([HIDDEN_UNITS])
 
 layer1 = tf.nn.relu(tf.matmul(x, W_layer1) + b_layer1)
 
-# W_layer2 = weight_variable('W_layer2', [HIDDEN_UNITS, HIDDEN_UNITS])
-# b_layer2 = bias_variable([HIDDEN_UNITS])
-
-# layer2 = tf.nn.relu(tf.matmul(layer1, W_layer2) + b_layer2)
-
 W_out = weight_variable('W_out', [HIDDEN_UNITS, NUM_LABELS])
 b_out = bias_variable([NUM_LABELS])
 
 h = tf.matmul(layer1, W_out) + b_out
 
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(h, y))
-# cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(h, y)
-        # + LAMBDA * (
-        # tf.nn.l2_loss(W_layer1) +
-        # tf.nn.l2_loss(W_layer2) +
-        # tf.nn.l2_loss(W_out)))
 
 train_step = tf.train.AdamOptimizer(LEARNING_RATE).minimize(cost)
 
@@ -61,7 +50,7 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
 
-    train_x, train_y = ds.scipy_get_all(BATCH_SIZE, NUM_LABELS) 
+    train_x, train_y = ds.scipy_get_all(IMAGES_PER_CHAR, NUM_LABELS) 
     test_x, test_y = ds.scipy_get_all(100, NUM_LABELS, test=True)
 
     for i in range(NUM_ITERATIONS):
