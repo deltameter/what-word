@@ -13,7 +13,7 @@ What-Word is a an implementation of a simple multilayer perceptron trained for t
 - GPUs are really, really good for ML. I trained on my (reasonably powerful) laptop with an integrated GPU and the model took 2 hours to converge. I trained on my desktop with a GTX 970 and it took several minutes. 
 
 ### Why not a Convolutional Neural Net?
-I wanted to make this using only tools that I truly understood, and since I started this project immediately after completing the neural network portion of Andrew Ng's Intro to ML course, I hadn't (and still haven't) been exposed to or truly learned about CNNs.
+I wanted to make this using only tools that I truly understood, and since I started this project immediately after completing the neural network portion of Andrew Ng's Intro to ML course, I hadn't been exposed to or truly learned about CNNs.
 
 
 NN was trained with the [NIST Special Database 19](https://www.nist.gov/srd/nist-special-database-19) 
